@@ -7,12 +7,20 @@ import sun.font.CoreMetrics;
 
 public class MoodAnalyserTest
 {
- @Test
+     @Test
     public void iAmIn_SadMood_ShuldReturn_sad()
     {
         MoodAnalyser moodAnalyser = new MoodAnalyser("I am in sad mood");
         String mood = moodAnalyser.analyseMood();
         Assert.assertEquals("sad" , mood);
+    }
+
+     @Test
+    public void iAmIn_anyMood_ShuldReturn_happy()
+    {
+        MoodAnalyser moodAnalyser = new MoodAnalyser("I am in any mood");
+        String mood = moodAnalyser.analyseMood();
+        Assert.assertEquals("happy" , mood);
     }
 
 }

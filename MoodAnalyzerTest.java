@@ -3,9 +3,13 @@ import com.bridgelabz.moodanalyzer.service.MoodAnalyser;
 import com.bridgelabz.moodanalyzer.service.MoodAnalyzerException;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 public class MoodAnalyserTest
 {
+
+    /**
+     * for checking Sad mood
+     * when found SAD in message
+     */
     @Test
     public void iAmIn_SadMood_ShouldReturn_Sad() throws MoodAnalyzerException
     {
@@ -20,6 +24,10 @@ public class MoodAnalyserTest
         }
         Assert.assertEquals("sad" , mood);
     }
+    /**
+     * for checking happy mood
+     * when not found SAD in message
+     */
     @Test
     public void iAmIn_anyMood_ShouldReturn_Happy() throws MoodAnalyzerException
     {
@@ -36,19 +44,40 @@ public class MoodAnalyserTest
         Assert.assertEquals("happy" , mood);
     }
 
+    /**
+     * for throwing MoodAnalyzerException and display message
+     * when message is null
+     */
     @Test
-    public void when_Null_Should_Return_Message() throws MoodAnalyzerException {
+    public void when_Entered_Null_Should_Throw_MoodAnalyzerException()
+    {
         MoodAnalyser moodAnalyser = new MoodAnalyser(null);
+        try
+        {
+             moodAnalyser.analyseMood();
+
+        } catch (MoodAnalyzerException e)
+        {
+            Assert.assertEquals(MoodAnalyzerException.ExceptionType.ENTERED_NULL, e.type);
+            System.out.println(e.getMessage());
+        }
+    }
+    /**
+     * for throwing MoodAnalyzerException and display message
+     * when message is empty
+     */
+    @Test
+    public void when_Empty_Should_Return_Message()
+    {
+        MoodAnalyser moodAnalyser = new MoodAnalyser("");
         try
         {
             moodAnalyser.analyseMood();
         } catch (MoodAnalyzerException e)
         {
-            Assert.assertEquals("please enter valid message", e.getMessage());
-            System.out.println("enter valid message");
+            Assert.assertEquals(MoodAnalyzerException.ExceptionType.ENTERED_EMPTY, e.type);
+            System.out.println(e.getMessage());
         }
-
-
     }
 
 }

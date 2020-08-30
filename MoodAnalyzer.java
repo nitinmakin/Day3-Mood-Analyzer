@@ -1,4 +1,4 @@
-package com.bridgelabz.moodanalyser;
+package com.bridgelabz.moodanalyzer.service;
 
 public class MoodAnalyser
 {
@@ -8,16 +8,16 @@ public class MoodAnalyser
         this.message = message;
     }
 
-    public String analyseMood() {
+    public String analyseMood() throws MoodAnalyzerException {
         try
         {
             if (message.contains("sad"))
                 return "sad";
             else
                 return "happy";
-        } catch (NullPointerException exception)
+        } catch (NullPointerException e)
         {
-           return "happy";
+           throw new MoodAnalyzerException("please enter valid message");
         }
     }
 }
